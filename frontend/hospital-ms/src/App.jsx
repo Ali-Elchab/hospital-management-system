@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="flex center App">
+    <div className="App">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
