@@ -1,0 +1,49 @@
+img {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.button-22 {
+  align-items: center;
+  background-color: #009efb;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 10px 38px;
+}
+
+.button-22:active {
+  background-color: #00a2ff;
+}
+
+.button-22:hover {
+  background-color: #0091e4;
+}
+
+.input-group > label {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  display: block;
+  transition: all 0.3s;
+  transform: translateY(0rem);
+}
+
+.input-group > input {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+  margin: 10px auto;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 90%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
