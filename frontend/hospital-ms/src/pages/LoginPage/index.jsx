@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import favIcon from "../../assets/logo-dark.png";
 import "./style.css";
-import { sendRequest } from "../../../core/helpers/request";
+import { sendRequest } from "../../core/helpers/request";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
