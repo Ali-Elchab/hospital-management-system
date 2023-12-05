@@ -5,7 +5,7 @@ include("connection.php");
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
-$query=$mysqli->prepare('select name,gender,`Date of birth`,`medical history`,contact from patients ');
+$query = $mysqli->prepare('select doctorID,name,specialization,contact from doctors ');
 
 if (!$query) {
     die("Query preparation failed: " . $mysqli->error);
@@ -16,19 +16,17 @@ if (!$query->execute()) {
 }
 
 $query->store_result();
-$query->bind_result($name, $gender, $DOB,$medical_history,$contact);
+$query->bind_result($doctorID, $name, $specialization, $contact_info);
 
-$response = []; 
-
+$response = [];
 while ($query->fetch()) {
     $row = [
+        'doctorID' => $doctorID,
         'name' => $name,
-        'gender' => $gender,
-        'DOB' => $DOB,
-        'medical_history' => $medical_history,
-        'contact' => $contact
+        'specialization' => $specialization,
+        'contact_info' => $contact_info
     ];
-    $response[] = $row; 
+    $response[] = $row;
 }
 
 echo json_encode($response);

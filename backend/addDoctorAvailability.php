@@ -7,19 +7,32 @@ $start_time = isset($_POST['start_time']) ? $_POST['start_time'] : null;
 $end_time = isset($_POST['end_time']) ? $_POST['end_time'] : null;
 
 if ($doctorID && $available_date && $start_time && $end_time) {
-    $addAvailability = $mysqli->prepare("INSERT INTO doctor_availability (doctorID, available_date, start_time, end_time) VALUES (?, ?, ?, ?)");
+    // Check if the availability already exists
+    $checkAvailability = $mysqli->prepare("SELECT COUNT(*) FROM doctor_availability WHERE doctorID = ? AND available_date = ? AND start_time = ? AND end_time = ?");
+    $checkAvailability->bind_param('isss', $doctorID, $available_date, $start_time, $end_time);
+    $checkAvailability->execute();
+    $checkAvailability->bind_result($count);
+    $checkAvailability->fetch();
 
-    if ($addAvailability) {
-        $addAvailability->bind_param('isss', $doctorID, $available_date, $start_time, $end_time);
-        $result = $addAvailability->execute();
+    if ($count == 0) {
+        // No duplicate found, proceed to add availability
+        $checkAvailability->close();
+        $addAvailability = $mysqli->prepare("INSERT INTO doctor_availability (doctorID, available_date, start_time, end_time) VALUES (?, ?, ?, ?)");
 
-        if ($result) {
-            echo "Availability added successfully!";
+        if ($addAvailability) {
+            $addAvailability->bind_param('isss', $doctorID, $available_date, $start_time, $end_time);
+            $result = $addAvailability->execute();
+
+            if ($result) {
+                echo "Availability added successfully!";
+            } else {
+                echo "Error adding availability.";
+            }
         } else {
-            echo "Error adding availability.";
+            echo "Failed to prepare the statement.";
         }
     } else {
-        echo "Failed to prepare the statement.";
+        echo "Availability already exists.";
     }
 } else {
     echo "Incomplete data received.";
