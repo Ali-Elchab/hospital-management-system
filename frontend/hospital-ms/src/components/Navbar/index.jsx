@@ -1,26 +1,20 @@
 import React from "react";
 import "./style.css";
+import favIcon from "../../assets/logo.png";
 
 const Navbar = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <button className="active">Home</button>
-        </li>
-        <li>
-          <button href="#news">News</button>
-        </li>
-        <li>
-          <button href="#contact">Contact</button>
-        </li>
-        <li>
-          <button href="#contact">Contact</button>
-        </li>
-        <li>
-          <button href="#contact">Contact</button>
-        </li>
-      </ul>
+    <div class="navbar flex ">
+      <img src={favIcon} alt="" />
+      <div class="dropdown">
+        <button class="dropbtn">
+          Admin
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <button>Profile</button>
+        </div>
+      </div>
     </div>
   );
 };
