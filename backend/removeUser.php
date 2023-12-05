@@ -1,10 +1,10 @@
 <?php
 include("connection.php");
 
-$username = $_POST['username'];
+$userID = $_POST['userID'];
 
-$queryDeleteUser = $mysqli->prepare("DELETE FROM `users` WHERE username = ?");
-$queryDeleteUser->bind_param('s', $username);
+$queryDeleteUser = $mysqli->prepare("DELETE FROM `users` WHERE userID = ?");
+$queryDeleteUser->bind_param('s', $userID);
 $queryDeleteUser->execute();
 if ($queryDeleteUser->affected_rows > 0) {
     echo "User successfully removed";

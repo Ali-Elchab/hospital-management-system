@@ -3,25 +3,29 @@ include("connection.php");
 
 // Check if the POST request has been made
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve the patient ID from the request
-    $patientID = isset($_POST['patientID']) ? $_POST['patientID'] : null;
 
-    // Retrieve the patient data from the request
+    $userID = isset($_POST['userID']) ? $_POST['userID'] : null;
     $name = isset($_POST['name']) ? $_POST['name'] : null;
-    $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
-    $DOB = isset($_POST['DOB']) ? $_POST['DOB'] : null;
-    $contact = isset($_POST['contact']) ? $_POST['contact'] : null;
-    $medical_history=isset($_POST['medical_history']) ? $_POST['medical_history'] : null;
+    $specialization=isset($_POST['specialization']) ? $_POST['specialization'] : null;
+    $contact=isset($_POST['contact']) ? $_POST['contact'] : null;
+    $username=isset($_POST['username']) ? $_POST['username']:null;
+    $password=isset($_POST['password']) ? $_POST['password']:null;
 
-    if ($patientID !== null && $name !== null && $gender !== null && $DOB !== null && $contact !== null && $medical_history !== null) {
 
-        $sql = "update patients set name = ?, gender = ?, `Date of birth` = ?, `medical history` = ? , contact=? WHERE patientID = ?";
+    if ($userID !== null && $name !== null && $specialization !== null && $contact !== null && $username !== null && $password !== null ) {
+        $sql = "update users set username = ?,password = ? WHERE userID = ?";
         $stmt = $mysqli->prepare($sql);
-        $stmt->bind_param("sssssi", $name, $gender, $DOB, $medical_history, $contact , $patientID);
+        $stmt->bind_param("ssi", $username, $password, $userID);
         $stmt->execute();
         $stmt->close();
 
-        echo json_encode(["status" => "success", "message" => "Patient updated successfully"]);
+        $sql = "update doctors set name = ?, specialization = ?, `contact` = ? WHERE userID = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("sssi", $name, $specialization, $contact,$userID);
+        $stmt->execute();
+        $stmt->close();
+
+        echo json_encode(["status" => "success", "message" => "Doctor updated successfully"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Missing fields"]);
     }

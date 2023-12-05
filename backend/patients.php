@@ -5,7 +5,7 @@ include("connection.php");
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
-$query=$mysqli->prepare('select name,specialization,contact from doctors ');
+$query=$mysqli->prepare('select name,gender,`Date of birth`,`medical history`,contact from patients ');
 
 if (!$query) {
     die("Query preparation failed: " . $mysqli->error);
@@ -16,14 +16,17 @@ if (!$query->execute()) {
 }
 
 $query->store_result();
-$query->bind_result($name, $specialization, $contact_info);
+$query->bind_result($name, $gender, $DOB,$medical_history,$contact);
 
 $response = []; 
+
 while ($query->fetch()) {
     $row = [
         'name' => $name,
-        'specialization' => $specialization,
-        'contact_info' => $contact_info
+        'gender' => $gender,
+        'DOB' => $DOB,
+        'medical_history' => $medical_history,
+        'contact' => $contact
     ];
     $response[] = $row; 
 }
