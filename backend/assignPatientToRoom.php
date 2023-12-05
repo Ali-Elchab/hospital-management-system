@@ -16,8 +16,6 @@ $availablity->execute();
 $availablity->bind_result($availablity_status, $room_number);
 $availablity->fetch();
 
-
-echo 'hello', $availablity_status;
 if ($availablity_status === 'available') {
     if ($getPatientsPerRoom->num_rows >= 2) {
         $getPatientsPerRoom->close();
