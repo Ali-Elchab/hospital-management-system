@@ -5,6 +5,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $role = $_POST['role'];
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+echo $hashed_password;
 
 $queryAddUser = $mysqli->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
 $queryAddUser->bind_param('sss', $username, $hashed_password, $role);
@@ -19,9 +20,9 @@ try {
 
         if ($queryGetUserID->num_rows > 0) {
             $queryGetUserID->bind_result($userID);
-            $queryGetUserID->fetch(); 
+            $queryGetUserID->fetch();
 
-       
+
             if ($role === 'doctor') {
                 $name = $_POST['name'];
                 $specialization = $_POST['specialization'];
@@ -36,35 +37,33 @@ try {
                 } else {
                     echo "Failed to add user as a doctor!";
                 }
-            }else if($role==='patient'){
-                
-                    $name = $_POST['name'];
-                    $gender = $_POST['gender'];
-                    $DOB = $_POST['DOB'];
-                    $medical_history = $_POST['medical_history'];
-                    $contact = $_POST['contact'];
+            } else if ($role === 'patient') {
 
-                    $queryAddDoctor = $mysqli->prepare("INSERT INTO patients (userID, name, gender, `Date of birth`, `medical history`, contact) VALUES (?, ?, ?, ?, ?, ?)");
-                    $queryAddDoctor->bind_param('isssss', $userID, $name, $gender, $DOB, $medical_history, $contact);
-                    $queryAddDoctor->execute();
-                    
-    
-                    if ($queryAddDoctor->affected_rows > 0) {
-                        echo "User added as a patient successfully!";
-                    } else {
-                        echo "Failed to add user as a patient!";
-                    }
-              
-            } 
+                $name = $_POST['name'];
+                $gender = $_POST['gender'];
+                $DOB = $_POST['DOB'];
+                $medical_history = $_POST['medical_history'];
+                $contact = $_POST['contact'];
+
+                $queryAddDoctor = $mysqli->prepare("INSERT INTO patients (userID, name, gender, `Date of birth`, `medical history`, contact) VALUES (?, ?, ?, ?, ?, ?)");
+                $queryAddDoctor->bind_param('isssss', $userID, $name, $gender, $DOB, $medical_history, $contact);
+                $queryAddDoctor->execute();
+
+
+                if ($queryAddDoctor->affected_rows > 0) {
+                    echo "User added as a patient successfully!";
+                } else {
+                    echo "Failed to add user as a patient!";
+                }
+            }
         } else {
             echo "Failed to retrieve user ID!";
         }
 
-        $queryGetUserID->close(); 
+        $queryGetUserID->close();
     } else {
         echo "Failed to add user!";
     }
 } catch (mysqli_sql_exception $e) {
     echo "Username already exists. Please choose a different username.";
 }
-

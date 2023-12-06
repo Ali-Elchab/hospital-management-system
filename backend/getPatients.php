@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 include("connection.php");
 
-$query = $mysqli->prepare('select patientID,name,gender,`Date of birth`,`medical history`,contact from patients ');
+$query = $mysqli->prepare('select userID,patientID,name,gender,`Date of birth`,`medical history`,contact from patients ');
 
 if (!$query) {
     die("Query preparation failed: " . $mysqli->error);
@@ -13,12 +13,13 @@ if (!$query->execute()) {
 }
 
 $query->store_result();
-$query->bind_result($patientID, $name, $gender, $DOB, $medical_history, $contact);
+$query->bind_result($userID, $patientID, $name, $gender, $DOB, $medical_history, $contact);
 
 $response = [];
 
 while ($query->fetch()) {
     $row = [
+        'userID' => $userID,
         'patientID' => $patientID,
         'name' => $name,
         'gender' => $gender,

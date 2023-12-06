@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 include("connection.php");
 
-$query = $mysqli->prepare('select userID,doctorID,name,specialization,contact from doctors ');
+$query = $mysqli->prepare("select roomID,room_number from rooms where availability_status= 'available' ");
 
 if (!$query) {
     die("Query preparation failed: " . $mysqli->error);
@@ -13,16 +13,13 @@ if (!$query->execute()) {
 }
 
 $query->store_result();
-$query->bind_result($userID, $doctorID, $name, $specialization, $contact_info);
+$query->bind_result($roomID, $room_number);
 
 $response = [];
 while ($query->fetch()) {
     $row = [
-        'userID' => $userID,
-        'doctorID' => $doctorID,
-        'name' => $name,
-        'specialization' => $specialization,
-        'contact_info' => $contact_info
+        'roomID' => $roomID,
+        'room_number' => $room_number,
     ];
     $response[] = $row;
 }

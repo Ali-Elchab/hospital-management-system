@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import ListDoctors from "../../components/ListDoctors";
 import ListPatients from "../../components/ListPatients";
 import AssignRoom from "../../components/AssignRoom";
 const Admin = () => {
   const [section, setSection] = useState("doctors");
-  const navigate = useNavigate();
   useEffect(() => {});
   return (
     <div className="container">

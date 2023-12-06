@@ -4,7 +4,9 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
 const ListDoctors = () => {
-  const handleEdit = (id) => {};
+  const handleEdit = (id) => {
+    navigate(`/editDoctor/${id}`);
+  };
   const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
 
@@ -42,8 +44,8 @@ const ListDoctors = () => {
               <td>{doctor.contact_info}</td>
               <td>
                 {/* Edit button */}
-                <Button text={"Edit"} onClick={() => handleEdit(doctor.id)} />
-                <Button text={"Edit"} onClick={() => handleEdit(doctor.id)} />
+                <Button text={"Edit"} onClick={() => navigate(`/editdoctor/${doctor.userID}`)} />
+                <Button text={"Delete"} onClick={() => navigate(`/deletedoctor/${doctor.userID}`)} />
               </td>
             </tr>
           ))}

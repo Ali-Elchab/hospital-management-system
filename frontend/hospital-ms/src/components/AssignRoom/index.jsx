@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { sendRequest } from "../../core/helpers/request";
-import Button from "../Button";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 
