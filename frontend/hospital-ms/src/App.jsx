@@ -4,16 +4,23 @@ import "./styles/colors.css";
 import LoginPage from "./pages/LoginPage";
 import Admin from "./pages/Admin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Doctor from "./pages/Doctor";
+import Patient from "./pages/Patient";
+import Navbar from "./components/Navbar";
+// import { useState } from "react";
 
 const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/admin" element={<Admin />} />
-          {/* <Route path="/" element={<LandingPage />} />  */}
-        </Routes>
+        <div className="body">
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/doctor" element={<Doctor />} />
+            <Route path="/patient" element={<Patient />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
   );

@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./style.css";
 import favIcon from "../../assets/logo.png";
 
 const Navbar = () => {
-  return (
-    <div class="navbar flex ">
+  const [isLogIn, setisLogIn] = useState(true);
+  const location = useLocation();
+  const [title, setTitle] = useState("");
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setisLogIn(true);
+    } else {
+      setisLogIn(false);
+    }
+    if (location.pathname === "/Admin") {
+      setTitle("Admin");
+    } else if (location.pathname === "/Doctor") {
+      setTitle("Doctor");
+    } else if (location.pathname === "/Patient") {
+      setTitle("Patient");
+    }
+  }, [location.pathname]);
+  return isLogIn ? (
+    <></>
+  ) : (
+    <div className="navbar flex ">
       <img src={favIcon} alt="" />
-      <div class="dropdown">
-        <button class="dropbtn">
-          Admin
-          <i class="fa fa-caret-down"></i>
+
+      <div className="dropdown">
+        <button className="dropbtn">
+          {title}
+          <i className="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
+        <div className="dropdown-content">
           <button>Profile</button>
+          <button>Log Out</button>
         </div>
       </div>
     </div>

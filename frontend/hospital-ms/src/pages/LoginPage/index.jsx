@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import favIcon from "../../assets/logo-dark.png";
 import "./style.css";
 import { sendRequest } from "../../core/helpers/request";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -26,20 +25,27 @@ const LoginPage = () => {
       route: "/login",
       method: "POST",
     });
-    console.log(response);
+    console.log(response.status);
 
     if (response.status === "success" && response.token) {
+      // console.log("HelloWOrld");
       localStorage.setItem("logged_in", true);
       localStorage.setItem("token", response.token);
-      const decodedToken = jwtDecode(response.token);
-      if (decodedToken.role === "admin") {
+      localStorage.setItem("role", response.role);
+      if (response.role === "admin") {
         navigate("/Admin");
+      }
+      if (response.role === "doctor") {
+        navigate("/Doctor");
+      }
+      if (response.role === "patient") {
+        navigate("/Patient");
       }
     }
   };
 
   return (
-    <div className="flex column center page">
+    <div className="flex column center page loginpage">
       <div className="flex column center page">
         <div className="account-logo">
           <img src={favIcon} alt="" />

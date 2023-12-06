@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-// import { sendRequest } from "../../core/helpers/request";
 import Navbar from "../../components/Navbar";
 import ListDoctors from "../../components/ListDoctors";
 import ListPatients from "../../components/ListPatients";

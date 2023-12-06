@@ -1,0 +1,53 @@
+.header {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.assignPatientToRoom {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-top: 70px;
+}
+
+.custom-dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-select {
+  width: 100%;
+  padding: 16px 16px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #e2e2e2;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdown-select:hover {
+  background-color: #ddd;
+}
+
+.dropdown-select:focus {
+  background-color: #ccc;
+}
+
+label {
+  font-size: 18px;
+  padding: 16px;
+}
+
+.submit {
+  padding: 18px;
+  background-color: #0091e4;
+  margin: 40px 10px;
+}
+
+.submitButtons {
+  margin: 40px 10px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
